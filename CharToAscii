@@ -1,0 +1,27 @@
+include \masm32\include\masm32rt.inc
+; this script can to used in masm to create the exe. 
+
+.data ; no data used in this program :)
+
+.code
+
+start:  ;main program 
+
+  @@: ; label local conext  
+        ; this is an inbuilt function takes keystrock  
+    invoke crt__getch ; crt__getch is an internal masm function included in masm32rt.inc
+    
+    cmp   eax, "Q" ; comparing the value with upper X 
+    ; jump is equal to X
+    je    @F ; now where is this jumping it will jump to the next label 
+             ; @@ or @f whichever is nearest
+    cmp   eax, "q" ; compare with smaller x
+    ;jump out if eqaul to x
+    je    @F ; again taking us out of loop
+    ;inbuilt function, similar to  C language 
+    printf("ascii-number:%d\t%c\n",eax,eax)
+    jmp   @B ; jump to previous label @@
+  @@: ;label local conext 
+    inkey ; cliche line "press any key to exit"
+    exit ; exit the process 
+end start
