@@ -31,22 +31,22 @@ start:
    
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-    call main
-    inkey
-    exit
+    call main ; call mail
+    inkey ; wait for keyboard input
+    exit ; exit the process 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-main proc
-    cls
-    push ebp
-    mov ebp, esp
-    invoke GetCL,1,addr ItemBuffer
-    push offset ItemBuffer
-    call crt_printf 
-    pop eax
+main proc 
+    cls ; clear screen 
+    push ebp ; push the baspointer , to save the retun pointer in LInked list of function called 
+    mov ebp, esp ; make stack pointer as base pointer of local function 
+    invoke GetCL,1,addr ItemBuffer; this is imp I am using the macro in order to skip the stack operation 
+                                    ; 1= position of the Argument , To save value 
+    push offset ItemBuffer ; push the offset
+    call crt_printf ; call the printf to print on the screen 
     print "Hello World",13,10
-    pop ebp
+    pop ebp; get the value of previous stacks base pointer 
     ret
 
 main endp
